@@ -1,0 +1,7 @@
+server:
+  port: 8095
+spring:
+  rabbitmq:
+    publisher-confirm-type: simple
+  application:
+    name: spring-file-service
