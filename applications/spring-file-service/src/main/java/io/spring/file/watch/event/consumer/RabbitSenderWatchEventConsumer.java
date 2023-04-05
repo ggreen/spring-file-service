@@ -15,12 +15,13 @@ import java.nio.file.WatchEvent;
 import java.util.Map;
 import java.util.function.Consumer;
 
-@Component
+//@Component
 @RequiredArgsConstructor
 @Slf4j
 public class RabbitSenderWatchEventConsumer implements Consumer<WatchEvent<Path>> {
     private final RabbitTemplate rabbitmqTemplate;
     private final Map<String, WatchEventMemento> region;
+    private final Path watchPath;
 
     @Value("${spring.cloud.stream.bindings.output.destination:amq.topic}")
     private String exchangeFile;
@@ -29,7 +30,7 @@ public class RabbitSenderWatchEventConsumer implements Consumer<WatchEvent<Path>
     @Override
     public void accept(WatchEvent<Path> event) {
 
-        var path = event.context();
+        var path = watchPath.resolve(event.context());
         var file = path.toFile();
         var absolutePath = file.getAbsolutePath();
         var routingKey = absolutePath;

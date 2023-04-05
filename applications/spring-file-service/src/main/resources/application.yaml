@@ -5,3 +5,6 @@ spring:
     publisher-confirm-type: simple
   application:
     name: spring-file-service
+file:
+  source:
+    pattern: "*.*"

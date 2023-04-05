@@ -12,7 +12,7 @@ import java.util.function.Consumer;
 
 import static java.nio.file.StandardWatchEventKinds.OVERFLOW;
 
-@Service
+//@Service
 @RequiredArgsConstructor
 @Slf4j
 public class FileSourceService {

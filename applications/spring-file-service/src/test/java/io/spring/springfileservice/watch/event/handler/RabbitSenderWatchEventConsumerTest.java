@@ -13,6 +13,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 
 import java.io.File;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.WatchEvent;
 import java.util.Map;
 
@@ -32,20 +33,21 @@ class RabbitSenderWatchEventConsumerTest {
     @Mock
     private Map<String, WatchEventMemento> region;
 
-    @Mock
-    private Path path;
 
     @Mock
     private WatchEvent.Kind<Path> kind;
 
     private File file = new File("src/test/resources/files/test.txt");
 
+    private Path path = Paths.get("/Users/Projects/solutions/integration/files/dev/spring-file-service/applications/spring-file-service");
+
+
     private RabbitSenderWatchEventConsumer subject;
 
 
     @BeforeEach
     void setUp() {
-        subject = new RabbitSenderWatchEventConsumer(rabbitTemplate,region);
+        subject = new RabbitSenderWatchEventConsumer(rabbitTemplate,region, path);
     }
 
     @DisplayName("Given: event did not previous exist WHEN:accept THEN: send to RabbitMQ")
@@ -53,7 +55,7 @@ class RabbitSenderWatchEventConsumerTest {
     void accept() {
 
         when(event.context()).thenReturn(path);
-        when(path.toFile()).thenReturn(file);
+//        when(path.toFile()).thenReturn(file);
         when(event.kind()).thenReturn(kind);
 
         subject.accept(event);
