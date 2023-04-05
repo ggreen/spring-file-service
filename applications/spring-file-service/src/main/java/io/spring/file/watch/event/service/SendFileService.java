@@ -86,6 +86,8 @@ public class SendFileService {
                         .withBody(fileBytes)
                         .setHeader("absolutePath",fileRecord.absolutePath())
                         .setHeader("lastModified",fileRecord.lastModified())
+                        .setHeader("name",file.getName())
+                        .setHeader("path",file.getPath())
                         .setContentType(Files.probeContentType(file.toPath()))
                         .build()
         );
