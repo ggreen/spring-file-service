@@ -25,3 +25,6 @@ spring:
       type: stream
     stream:
       host: localhost
+file:
+  sink:
+    rootDirectory: "/tmp/io/output"

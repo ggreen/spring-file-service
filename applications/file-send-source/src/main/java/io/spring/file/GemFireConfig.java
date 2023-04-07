@@ -12,6 +12,21 @@ import org.springframework.data.gemfire.config.annotation.EnablePdx;
 
 import java.util.Map;
 
+/**
+ * Embedded GemFire service values
+ *
+ * Create GemFire connections.
+ *
+ * Create region: File
+ *
+ *
+ *
+ * Properties
+ *
+ * - gemfire.work.dir = the GemFire working directory for persistence
+ *
+ * @author gregory green
+ */
 @Configuration
 @CacheServerApplication
 @EnablePdx(persistent = true, diskStoreName = "PDX-DS")
@@ -21,7 +36,6 @@ import java.util.Map;
                 @EnableDiskStore(name = "FILE-DS", maxOplogSize = 512, diskDirectories = @EnableDiskStore.DiskDirectory(location = "${gemfire.work.dir}"))
         }
 )
-
 public class GemFireConfig {
 
     @Bean("File")

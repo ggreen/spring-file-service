@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Map;
 
 @Service
@@ -21,19 +23,26 @@ public class SendFileService {
     private final Map<String, FileRecord> region;
 
     private final String exchangeFile;
+
+    private final Path rootDirectory;
     private final String filePattern;
 
     public SendFileService(RabbitTemplate rabbitTemplate,
                            Map<String, FileRecord> region,
                            @Value("${spring.cloud.stream.bindings.output.destination}")
                            String exchangeFile,
+                           @Value ("${file.source.rootDirectory}")
+                           String rootDirectory,
                            @Value("${file.source.pattern}")
-                           String filePattern) {
+                           String filePattern
+
+                           ) {
 
         this.rabbitTemplate = rabbitTemplate;
         this.region = region;
         this.exchangeFile = exchangeFile;
         this.filePattern = filePattern;
+        this.rootDirectory = Paths.get(rootDirectory);
     }
 
     @SneakyThrows
@@ -50,7 +59,6 @@ public class SendFileService {
         var fileRecord = region.get(absolutePath);
 
         log.info("Previous File info: {} for path ",fileRecord,absolutePath);
-
 
         if(fileRecord != null)
         {
@@ -87,13 +95,17 @@ public class SendFileService {
                         .setHeader("absolutePath",fileRecord.absolutePath())
                         .setHeader("lastModified",fileRecord.lastModified())
                         .setHeader("name",file.getName())
-                        .setHeader("path",file.getPath())
+                        .setHeader("path",toPath(file))
                         .setContentType(Files.probeContentType(file.toPath()))
                         .build()
         );
 
         //save memento
         region.put(absolutePath,fileRecord);
+    }
+
+    protected String toPath(File file) {
+        return rootDirectory.relativize(file.toPath()).toString();
     }
 
     public void processFiles(File[] listFiles) {

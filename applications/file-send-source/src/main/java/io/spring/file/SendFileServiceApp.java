@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringFileServiceApp {
+public class SendFileServiceApp {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringFileServiceApp.class, args);
+		SpringApplication.run(SendFileServiceApp.class, args);
 	}
 
 }

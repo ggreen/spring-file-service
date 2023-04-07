@@ -15,4 +15,4 @@ file:
     pattern: "*.*"
 gemfire:
   work:
-    dir: "/Users/Projects/solutions/integration/files/dev/spring-file-service/deployment/gemfire/work-dir"
+#    dir: "/Users/Projects/solutions/integration/files/dev/spring-file-service/deployment/gemfire/work-dir"
