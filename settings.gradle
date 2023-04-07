@@ -1,2 +1,6 @@
 rootProject.name = 'spring-file-service'
-include 'applications', 'shared', 'applications:spring-file-service'
+
+include 'components', 'shared', 'components:file-domains'
+include 'applications', 'shared', 'applications:file-send-source'
+include 'applications', 'shared', 'applications:file-consumer-sink'
+

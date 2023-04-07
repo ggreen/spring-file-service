@@ -1,0 +1,18 @@
+server:
+  port: 8095
+spring:
+  cloud:
+      stream:
+        bindings:
+          output:
+            destination: file.event
+  rabbitmq:
+    publisher-confirm-type: simple
+  application:
+    name: spring-file-service
+file:
+  source:
+    pattern: "*.*"
+gemfire:
+  work:
+    dir: "/Users/Projects/solutions/integration/files/dev/spring-file-service/deployment/gemfire/work-dir"

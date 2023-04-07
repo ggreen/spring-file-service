@@ -1,0 +1,3 @@
+file:
+  watch:
+    path: "src/test/resources/files"

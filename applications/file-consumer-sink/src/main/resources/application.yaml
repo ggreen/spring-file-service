@@ -1,0 +1,27 @@
+server:
+  port: 8097
+spring:
+  application:
+    name: file-consumer-sink
+  cloud:
+    function.definition: fileConsumer
+    stream:
+      bindings:
+        fileConsumer-in-0:
+          destination: file.event
+          group: file-consumer-sink
+          consumer:
+            concurrency: 1
+#            container-type: simple
+            container-type: stream
+      rabbit:
+        bindings:
+          fileConsumer-in-0:
+            consumer:
+#              container-type: simple
+              container-type: stream
+  rabbitmq:
+    listener:
+      type: stream
+    stream:
+      host: localhost

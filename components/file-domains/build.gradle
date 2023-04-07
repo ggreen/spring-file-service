@@ -1,0 +1,46 @@
+plugins {
+	id 'java'
+//	id 'org.springframework.boot' version '2.7.10'
+//	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'io.spring'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+	mavenLocal()
+	maven {
+		credentials {
+			username System.getenv("HARBOR_USER")
+			password System.getenv("HARBOR_PASSWORD")
+		}
+		url = uri("https://commercial-repo.pivotal.io/data3/gemfire-release-repo/gemfire")
+	}
+}
+
+dependencies {
+	implementation group: 'com.github.nyla-solutions', name: 'nyla.solutions.core', version: '2.0.1'
+//	implementation 'org.springframework.boot:spring-boot-starter-web'
+//	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+//	implementation 'org.springframework.boot:spring-boot-starter-amqp'
+//	implementation "com.vmware.gemfire:spring-boot-2.7-gemfire-9.15:1.1.0"
+//	implementation ("com.vmware.gemfire:geode-server-all:9.15.4"){
+//		exclude group: 'com.vmware.gemfire', module: 'geode-log4j'
+//	}
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+//	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+//	testImplementation 'org.springframework.amqp:spring-rabbit-test'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
