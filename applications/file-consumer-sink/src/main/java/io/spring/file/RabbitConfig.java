@@ -1,6 +1,7 @@
 package io.spring.file;
 
 import com.rabbitmq.client.ConnectionFactory;
+import com.rabbitmq.stream.OffsetSpecification;
 import org.springframework.amqp.core.Exchange;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
@@ -13,8 +14,11 @@ import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.amqp.support.converter.MessagingMessageConverter;
 import org.springframework.amqp.support.converter.SimpleMessageConverter;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.cloud.stream.config.ListenerContainerCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.rabbit.stream.listener.StreamListenerContainer;
 import org.springframework.rabbit.stream.support.converter.DefaultStreamMessageConverter;
 
 @Configuration
@@ -53,8 +57,27 @@ public class RabbitConfig {
     @Bean
     MessageConverter convert()
     {
-//        return new DefaultStreamMessageConverter();
         return new ContentTypeDelegatingMessageConverter();
+    }
+
+
+    /**
+     * if you always want the former (starting at next), you should not name your consumer.
+     * @return customizer
+     */
+    @Bean
+    @ConditionalOnProperty(name = "spring.rabbitmq.listener.type",havingValue = "stream")
+    ListenerContainerCustomizer<MessageListenerContainer> customizer() {
+        return (cont, dest, group) -> {
+            StreamListenerContainer container = (StreamListenerContainer) cont;
+            container.setConsumerCustomizer((name, builder) -> {
+//                builder.name(applicationName);
+                builder.offset(OffsetSpecification.next())
+                        .name(applicationName);
+                builder.autoTrackingStrategy();
+            });
+            // ...
+        };
     }
 
     @Bean

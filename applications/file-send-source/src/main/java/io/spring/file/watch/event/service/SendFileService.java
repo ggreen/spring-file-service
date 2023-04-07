@@ -15,6 +15,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
 
+/**
+ * Send Files to RabbitMQ
+ * @author gregory Green
+ */
 @Service
 @Slf4j
 public class SendFileService {
@@ -27,6 +31,14 @@ public class SendFileService {
     private final Path rootDirectory;
     private final String filePattern;
 
+    /**
+     *
+     * @param rabbitTemplate the rabbit template
+     * @param region the gemfire region map
+     * @param exchangeFile the RabbitMQ exchange
+     * @param rootDirectory the root directory to watch for files
+     * @param filePattern the filter pattern for files
+     */
     public SendFileService(RabbitTemplate rabbitTemplate,
                            Map<String, FileRecord> region,
                            @Value("${spring.cloud.stream.bindings.output.destination}")
@@ -45,6 +57,20 @@ public class SendFileService {
         this.rootDirectory = Paths.get(rootDirectory);
     }
 
+    /**
+     * Process a list of files
+     * @param listFiles list of files to process
+     */
+    public void processFiles(File[] listFiles) {
+        for (File file: listFiles) {
+            process(file);
+        }
+    }
+
+    /**
+     * Send the given file
+     * @param file the file to send
+     */
     @SneakyThrows
     public void process(File file) {
 
@@ -104,13 +130,14 @@ public class SendFileService {
         region.put(absolutePath,fileRecord);
     }
 
+    /**
+     *
+     * @param file the process file
+     * @return the relative path based on root directory
+     */
     protected String toPath(File file) {
         return rootDirectory.relativize(file.toPath()).toString();
     }
 
-    public void processFiles(File[] listFiles) {
-        for (File file: listFiles) {
-            process(file);
-        }
-    }
+
 }

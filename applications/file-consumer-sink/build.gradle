@@ -31,6 +31,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-amqp'
 	implementation 'org.springframework.amqp:spring-rabbit-stream'
 	implementation 'org.springframework.cloud:spring-cloud-stream'
+	implementation 'com.rabbitmq:stream-client:0.9.0'
 	implementation 'org.springframework.cloud:spring-cloud-stream-binder-rabbit'
 	implementation ("com.vmware.gemfire:geode-server-all:9.15.4"){
 		exclude group: 'com.vmware.gemfire', module: 'geode-log4j'

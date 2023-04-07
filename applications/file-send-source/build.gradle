@@ -39,6 +39,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-amqp'
 	implementation 'org.springframework.amqp:spring-rabbit-stream'
 	implementation 'org.springframework.cloud:spring-cloud-stream'
+//	implementation 'org.springframework.cloud:spring-cloud-stream-binder-rabbit:3.2.7'
 	implementation 'org.springframework.cloud:spring-cloud-stream-binder-rabbit'
 	implementation "com.vmware.gemfire:spring-boot-2.7-gemfire-9.15:1.1.0"
 	implementation ("com.vmware.gemfire:geode-server-all:9.15.4"){

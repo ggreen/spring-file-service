@@ -15,16 +15,32 @@ import java.util.function.Consumer;
 
 import static java.lang.String.valueOf;
 
+/**
+ * Consumer to save files to disk
+ * @author gregory green
+ */
 @Component
 @Slf4j
 public class FileConsumer implements Consumer<Message> {
+    private static final String NAME_HEADER = "name";
+    private final static String PATH_HEADER = "path";
+
     private final String rootDirectory;
+
+    /**
+     * Constructor
+     * @param rootDirectory the root directory to save files
+     */
     public FileConsumer(@Value("${file.sink.rootDirectory}") String rootDirectory) {
         this.rootDirectory = rootDirectory;
 
         log.info("*****Files will be written to value of propertu \"file.sink.rootDirectory\": {}",rootDirectory);
     }
 
+    /**
+     * Save recieve message payload to disk
+     * @param message the input argument
+     */
     @SneakyThrows
     @Transactional
     @Override
@@ -34,8 +50,8 @@ public class FileConsumer implements Consumer<Message> {
 
         var headers = message.getHeaders();
 
-        String path = valueOf(headers.get("path"));
-        var name = valueOf(headers.get("name"));
+        String path = valueOf(headers.get(PATH_HEADER));
+        var name = valueOf(headers.get(NAME_HEADER));
         Object rawPayload = message.getPayload();
         byte[] payload;
 
