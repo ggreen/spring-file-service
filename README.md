@@ -45,3 +45,20 @@ It uses a push based model from producers to consumers.
 The file-consumer-sink saves meta-data to remember which files where send to RabbitMQ.
 It uses [GemFire](https://www.vmware.com/products/gemfire.html) (based on [Apache Geode](https://www.linkedin.com/learning/achieving-low-latency-data-with-edge-computing/apache-geode?autoplay=true&resume=false)).
 GemFire is an In-memory SQL-database. It provides high-performance real-time apps with an ultra-high speed, in-memory data and compute grid data processing.
+
+
+-----
+
+# Operations
+
+
+## File Consumer Sink
+
+
+```shell
+java -jar --gemfire.deploy-working-dir=/Users/Projects/solutions/integration/files/dev/spring-file-service/runtime
+```
+
+```shell
+--add-exports  java.management/com.sun.jmx.remote.security=ALL-UNNAMED
+```

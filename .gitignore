@@ -2,6 +2,7 @@
 /build/
 BACKUP*.*
 *.lk
+*.dat
 
 
 # Ignore Gradle GUI config
