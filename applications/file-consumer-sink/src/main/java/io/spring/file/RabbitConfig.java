@@ -30,7 +30,7 @@ public class RabbitConfig {
     @Value("${spring.rabbitmq.password:guest}")
     private String password  = "guest";
 
-    @Value("${spring.rabbitmq.host:localhost}")
+    @Value("${spring.rabbitmq.host}")
     private String hostname = "localhost";
 
     @Value("${spring.application.name}")

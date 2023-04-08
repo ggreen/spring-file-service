@@ -28,12 +28,12 @@ spring:
     listener:
       type: stream
 #      type: simple
-    stream:
-      host: localhost
+#    stream:
+#      host: localhost
 file:
   sink:
-    rootDirectory: "/tmp/io/output"
-logging.level:
-  com:
-    rabbitmq:
-      stream: debug
+#    rootDirectory: "/tmp/io/output"
+#logging.level:
+#  com:
+#    rabbitmq:
+#      stream: debug

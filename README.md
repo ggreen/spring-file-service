@@ -51,12 +51,21 @@ GemFire is an In-memory SQL-database. It provides high-performance real-time app
 
 # Operations
 
+Properties
+
+| Properties               | Notes                          |  Default |
+|--------------------------|--------------------------------|  -------------
+| spring.rabbitmq.host     | Rabbit host connection         | |
+| file.sink.rootDirectory  | Root Directory to save files   |  |
+
+
+
 
 ## File Consumer Sink
 
 
 ```shell
-java -jar --gemfire.deploy-working-dir=/Users/Projects/solutions/integration/files/dev/spring-file-service/runtime
+java -jar applications/file-consumer-sink/build/libs/file-consumer-sink-0.0.1-SNAPSHOT.jar --spring.rabbitmq.host=localhost --file.sink.rootDirectory=/tmp/io/output
 ```
 
 ```shell
