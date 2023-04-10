@@ -51,14 +51,11 @@ GemFire is an In-memory SQL-database. It provides high-performance real-time app
 
 # Operations
 
-
-
-
 ## File Consumer Sink
 
-The 
+The [file-consumer-sink](https://github.com/ggreen/spring-file-service/tree/main/applications/file-consumer-sink) application uses [RabbitMQ streams](https://www.rabbitmq.com/streams.html) to save files content from Rabbit to a local directory. 
 
-**Properties**
+**Application Properties**
 
 | Properties               | Notes                        | Default |
 |--------------------------|------------------------------|---------
@@ -93,7 +90,7 @@ within the [Spring Boot](https://spring.io/projects/spring-boot) application usi
 
 
 
-**Properties**
+**Application Properties**
 
 | Properties                                        | Notes                                               | Default |
 |---------------------------------------------------|-----------------------------------------------------|---------|
