@@ -19,7 +19,7 @@ This project was developed to demonstrate file movement and integration
 ### High throughput file streaming
 
 [RabbitMQ](https://www.rabbitmq.com/) supports moving large number of small files.
-The application consumer supports the [RabbitMQ streaming](https://www.rabbitmq.com/stream.html) that has [benchmarks to support throughput of millions messages](https://tanzu.vmware.com/content/blog/rabbitmq-event-streaming-broker) per second.
+The [file-consumer-sink](https://github.com/ggreen/spring-file-service/tree/main/applications/file-consumer-sink) application supports the [RabbitMQ streaming](https://www.rabbitmq.com/stream.html) that has [benchmarks to support throughput of millions messages](https://tanzu.vmware.com/content/blog/rabbitmq-event-streaming-broker) per second.
 
 ### Multi-site replication (hub-spoke)
 
