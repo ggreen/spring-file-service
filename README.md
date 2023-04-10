@@ -7,7 +7,7 @@ This project was developed to demonstrate file movement and integration
 - Multi-site replication (hub-spoke) 
 - Distribution of millions of small files
 - Maintain file source directory structure 
-- Low latency file data transfers
+- Low-latency file data transfers
 
 
 # Architecture
@@ -18,8 +18,8 @@ This project was developed to demonstrate file movement and integration
 
 ### High throughput file streaming
 
-[RabbitMQ](https://www.rabbitmq.com/) supports moving large number of small files.
-The [file-consumer-sink](https://github.com/ggreen/spring-file-service/tree/main/applications/file-consumer-sink) application supports the [RabbitMQ streaming](https://www.rabbitmq.com/stream.html) that has [benchmarks to support throughput of millions messages](https://tanzu.vmware.com/content/blog/rabbitmq-event-streaming-broker) per second.
+[RabbitMQ](https://www.rabbitmq.com/) supports moving a large number of small files.
+The [file-consumer-sink](https://github.com/ggreen/spring-file-service/tree/main/applications/file-consumer-sink) application supports the [RabbitMQ streaming](https://www.rabbitmq.com/stream.html) that has [benchmarks to support the throughput of millions messages](https://tanzu.vmware.com/content/blog/rabbitmq-event-streaming-broker) per second.
 
 ### Multi-site replication (hub-spoke)
 
@@ -30,21 +30,21 @@ RabbitMQ features such as [exchanges](https://www.rabbitmq.com/tutorials/amqp-co
 RabbitMQ supports high availability and fault tolerance for messaging.
 Rabbit can be set up as a cluster within a single network. Outages to one or more RabbitMQ servers can be transparent to producer and consumer applications. 
 
-In general, message utilize memory, disk and network resources. In RabbitMQ (ex: version RabbitMQ 11) the default max size if 134 MB. The messages should be less the maximum allowed size of 512 MB. See [RabbitMQ configuration](https://www.rabbitmq.com/configure.html). 
+In general, messages utilize memory, disk, and network resources. In RabbitMQ (ex: version RabbitMQ 11) the default max size if 134 MB. The messages should be less than maximum allowed size of 512 MB. See [RabbitMQ configuration](https://www.rabbitmq.com/configure.html). 
 
 ### Maintain file source directory structure
 
-The [file-send-source](https://github.com/ggreen/spring-file-service/tree/main/applications/file-send-source) application  implementation maintains adds the file attributes to each message. This includes the absolute path, the relative path, in addition to the file counter. The application using an RabbitMQ exchange to introduce custom routing logic.
+The [file-send-source](https://github.com/ggreen/spring-file-service/tree/main/applications/file-send-source) application  implementation adds the file attributes to each message. This includes absolute path, relative path, in addition to the file content. The application sends messages to an RabbitMQ exchange that allows for future custom routing logic.
 
 
-### Low latency file data transfers
+### Low-latency file data transfers
 
-RabbitMQ supports [low latency event streaming](https://www.linkedin.com/learning/achieving-low-latency-data-with-edge-computing/rabbitmq?autoplay=true&resume=false).
-It uses a push based model from producers to consumers.  
+RabbitMQ supports [low-latency event streaming](https://www.linkedin.com/learning/achieving-low-latency-data-with-edge-computing/rabbitmq?autoplay=true&resume=false).
+It uses a push-based model from producers to consumers.  
 
-The file-consumer-sink saves meta-data to remember which files where send to RabbitMQ.
+The file-consumer-sink saves meta-data to remember files sent to RabbitMQ.
 It uses [GemFire](https://www.vmware.com/products/gemfire.html) (based on [Apache Geode](https://www.linkedin.com/learning/achieving-low-latency-data-with-edge-computing/apache-geode?autoplay=true&resume=false)).
-GemFire is an In-memory SQL-database. It provides high-performance real-time apps with an ultra-high speed, in-memory data and compute grid data processing.
+GemFire is an In-memory SQL-database. It provides high-performance real-time apps with ultra-high speed, in-memory data and compute grid data processing.
 
 
 -----
@@ -53,7 +53,7 @@ GemFire is an In-memory SQL-database. It provides high-performance real-time app
 
 ## File Consumer Sink
 
-The [file-consumer-sink](https://github.com/ggreen/spring-file-service/tree/main/applications/file-consumer-sink) application uses [RabbitMQ streams](https://www.rabbitmq.com/streams.html) to save files content from Rabbit to a local directory. 
+The [file-consumer-sink](https://github.com/ggreen/spring-file-service/tree/main/applications/file-consumer-sink) application uses [RabbitMQ streams](https://www.rabbitmq.com/streams.html) to save file content from Rabbit to a local directory. 
 
 **Application Properties**
 
