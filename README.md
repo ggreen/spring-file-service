@@ -81,7 +81,7 @@ to watch files in given a root source directory.
 
 New or updated files will be sent to [RabbitMQ exchange](https://www.rabbitmq.com/tutorials/amqp-concepts.html).
 
-**GemFire **
+#### GemFire
 
 The application stores meta-data about which files have been sent
 with an embedded [GemFire server](https://docs.spring.io/spring-data/geode/docs/current/reference/html/#bootstrap-annotation-config-geode-applications) 
