@@ -13,6 +13,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.rabbit.stream.support.converter.DefaultStreamMessageConverter;
 
+/**
+ * The RabbitMQ configuration
+ * @author gregory Green
+ */
 @Configuration
 public class RabbitConfig {
 
@@ -22,11 +26,14 @@ public class RabbitConfig {
     @Value("${spring.rabbitmq.password:guest}")
     private String password  = "guest";
 
-    @Value("${spring.rabbitmq.host:localhost}")
+    @Value("${spring.rabbitmq.host}")
     private String hostname = "localhost";
 
     @Value("${spring.application.name}")
     private String applicationName;
+
+    @Value("${spring.rabbitmq.port:5672}")
+    private int port;
 
 
     @Bean
@@ -41,6 +48,7 @@ public class RabbitConfig {
         factory.setHost(hostname);
         factory.setUsername(username);
         factory.setPassword(password);
+        factory.setPort(port);
 
         return new ThreadChannelConnectionFactory(factory.getRabbitConnectionFactory())
                 .getRabbitConnectionFactory();

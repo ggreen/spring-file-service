@@ -36,6 +36,9 @@ public class RabbitConfig {
     @Value("${spring.application.name}")
     private String applicationName;
 
+    @Value("${spring.rabbitmq.port:5672}")
+    private int port;
+
 
     @Bean
     ConnectionNameStrategy connectionNameStrategy(){
@@ -49,6 +52,7 @@ public class RabbitConfig {
         factory.setHost(hostname);
         factory.setUsername(username);
         factory.setPassword(password);
+        factory.setPort(port);
 
         return new ThreadChannelConnectionFactory(factory.getRabbitConnectionFactory())
                 .getRabbitConnectionFactory();

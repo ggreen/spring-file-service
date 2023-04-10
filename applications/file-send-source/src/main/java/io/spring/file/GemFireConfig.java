@@ -29,8 +29,8 @@ import java.util.Map;
  * java.management
  * @author gregory green
  */
-@Configuration
-@CacheServerApplication
+
+
 @EnablePdx(persistent = true, diskStoreName = "PDX-DS")
 @EnableDiskStores(
         diskStores = {
@@ -39,6 +39,8 @@ import java.util.Map;
                 @EnableDiskStore(name = "FILE-DS", maxOplogSize = 512, diskDirectories = @EnableDiskStore.DiskDirectory(location = "${spring.data.gemfire.disk.store.directory.location}"))
         }
 )
+@CacheServerApplication
+@Configuration
 public class GemFireConfig {
 
     @Bean("File")
