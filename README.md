@@ -113,15 +113,15 @@ within the [Spring Boot](https://spring.io/projects/spring-boot) application usi
 java -jar applications/file-send-source/build/libs/file-send-source-0.0.1-SNAPSHOT.jar --spring.data.gemfire.disk.store.directory.location=/Users/Projects/solutions/integration/files/dev/spring-file-service/deployment/gemfire/work-dir --spring.rabbitmq.host=localhost --file.source.rootDirectory=/tmp/io/input/
 ```
 
-If you would like to connect the File Send Source to a GemFire add the additional flag.
-
-Note the following was tested on Java SDK version 17.
+If you would like to connect the File Send Source to a GemFire Locator, then add the following (note the following was tested on Java SDK version 17):
 
 Start GemFire [locator](https://docs.vmware.com/en/VMware-GemFire/9.15/gf/configuring-running-running_the_locator.html) using [Gfsh](https://docs.vmware.com/en/VMware-GemFire/9.15/gf/tools_modules-gfsh-quick_ref_commands_by_area.html)
 
 ```shell
 $GEMFIRE_HOME/bin/gfsh -e "start locator --name=locator"
 ```
+
+*Adding JVM --add-opens --add-exports, and spring.data.gemfire.locators arguments*
 
 ```shell
 java   --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-exports  java.management/com.sun.jmx.remote.security=ALL-UNNAMED --add-exports  java.base/sun.nio.ch=ALL-UNNAMED -jar applications/file-send-source/build/libs/file-send-source-0.0.1-SNAPSHOT.jar --spring.data.gemfire.disk.store.directory.location=/Users/Projects/solutions/integration/files/dev/spring-file-service/deployment/gemfire/work-dir --spring.rabbitmq.host=localhost --file.source.rootDirectory=/tmp/io/input/ --spring.data.gemfire.locators="localhost[10334]"
