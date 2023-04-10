@@ -34,7 +34,8 @@ In general, message utilize memory, disk and network resources. In RabbitMQ (ex:
 
 ### Maintain file source directory structure
 
-The [file-send-source](https://github.com/ggreen/spring-file-service/tree/main/applications/file-send-source) application  implementation maintains adds the file attributes to each message. This includes the absolute path, the relative path, in addition to the file counter.
+The [file-send-source](https://github.com/ggreen/spring-file-service/tree/main/applications/file-send-source) application  implementation maintains adds the file attributes to each message. This includes the absolute path, the relative path, in addition to the file counter. The application using an RabbitMQ exchange to introduce custom routing logic.
+
 
 ### Low latency file data transfers
 
@@ -68,7 +69,7 @@ The
 | file.sink.rootDirectory  | Root directory to save files |         |
 
 
-**Starting the application**
+### Run file-consumer-sink
 
 ```shell
 java -jar applications/file-consumer-sink/build/libs/file-consumer-sink-0.0.1-SNAPSHOT.jar --spring.rabbitmq.host=localhost --file.sink.rootDirectory=/tmp/io/output
@@ -109,7 +110,7 @@ within the [Spring Boot](https://spring.io/projects/spring-boot) application usi
 | spring.data.gemfire.disk.store.directory.location | Directory to store GemFire file meta-data           |         |
 
 
-Run the file Source 
+## Run file-send-source 
 
 ```shell
 java -jar applications/file-send-source/build/libs/file-send-source-0.0.1-SNAPSHOT.jar --spring.data.gemfire.disk.store.directory.location=/Users/Projects/solutions/integration/files/dev/spring-file-service/deployment/gemfire/work-dir --spring.rabbitmq.host=localhost --file.source.rootDirectory=/tmp/io/input/
