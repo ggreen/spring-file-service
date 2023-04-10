@@ -141,24 +141,6 @@ Example output
 
 
 ```shell
-./gfsh -e "connect --locator=localhost[10334]" -e "--query='select * from /File' "
-Invalid command or option : -e, connect --locator=localhost[10334], -e, --query='select * from /File' .
-Use gfsh help to display additional information.
-/Users/devtools/repositories/IMDG/gemfire/vmware-gemfire-9.15.4/bin$ ./gfsh -e "connect --locator=localhost[10334]" -e "query --query='select * from /File' "
-
-(1) Executing - connect --locator=localhost[10334]
-
-Connecting to Locator at [host=localhost, port=10334] ..
-Connecting to Manager at [host=192.168.86.201, port=1099] ..
-Successfully connected to: [host=192.168.86.201, port=1099]
-
-You are connected to a cluster of version 9.15.4.
-
-
-(2) Executing - query --query='select * from /File'
-
-Result  : false
-Message : Cannot find regions <[/File]> in any of the members
 
 /Users/devtools/repositories/IMDG/gemfire/vmware-gemfire-9.15.4/bin$ ./gfsh -e "connect --locator=localhost[10334]" -e "query --query='select * from /File' "
 
