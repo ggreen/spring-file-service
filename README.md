@@ -173,3 +173,11 @@ Rows   : 13
 "/tmp/io/input/heat/test2.txt"           | 1680871579502
 "/tmp/io/input/e-receipt.pdf"            | 1680878671420
 ```
+
+# Building
+
+This project using GemFire commercial edition.
+See the following to
+
+[Obtain GemFire libraries from a Maven Repository](https://docs.vmware.com/en/VMware-GemFire/9.15/gf/getting_started-installation-obtain_gemfire_maven.html).
+
