@@ -51,6 +51,12 @@ GemFire is an In-memory SQL-database. It provides high-performance real-time app
 
 # Operations
 
+
+## RabbitMQ
+
+This solution uses [RabbitMQ](https://www.rabbitmq.com/). 
+See the following to [download and install RabbitMQ](https://www.rabbitmq.com/download.html).
+
 ## File Consumer Sink
 
 The [file-consumer-sink](https://github.com/ggreen/spring-file-service/tree/main/applications/file-consumer-sink) application uses [RabbitMQ streams](https://www.rabbitmq.com/streams.html) to save file content from Rabbit to a local directory. 
@@ -176,7 +182,7 @@ Rows   : 13
 
 # Building
 
-This project using GemFire commercial edition.
+This project uses GemFire commercial edition.
 See the following to
 
 [Obtain GemFire libraries from a Maven Repository](https://docs.vmware.com/en/VMware-GemFire/9.15/gf/getting_started-installation-obtain_gemfire_maven.html).
